@@ -199,6 +199,29 @@ body {
   cursor: not-allowed;
 }
 
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.field-group legend {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  padding: 0 0 4px;
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+}
+
 .status-ok {
   color: var(--color-ok);
 }

@@ -50,7 +50,16 @@ function LoginPage() {
         }),
       })
       setAuthToken(data.token)
-      const destination = location.state?.from || '/dashboard'
+
+      let destination = location.state?.from || '/dashboard'
+      try {
+        await apiFetch('/preferences')
+      } catch (prefError) {
+        if (prefError.status === 404) {
+          destination = '/onboarding'
+        }
+      }
+
       navigate(destination, { replace: true })
     } catch (error) {
       if (error.body?.error?.fields) {
