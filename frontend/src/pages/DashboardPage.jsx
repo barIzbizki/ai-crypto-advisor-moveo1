@@ -25,19 +25,21 @@ function DashboardPage() {
   }, [])
 
   return (
-    <section>
+    <section className="page">
       <h1>Dashboard</h1>
-      <p>Backend status: {health.state === 'loading' && 'checking...'}</p>
-      {health.state === 'healthy' && (
-        <p data-testid="backend-status" className="status-ok">
-          Backend is healthy ({health.data.status})
-        </p>
-      )}
-      {health.state === 'error' && (
-        <p data-testid="backend-status" className="status-error">
-          Backend unreachable: {health.message}
-        </p>
-      )}
+      <div className="card">
+        <p>Backend status: {health.state === 'loading' && 'checking...'}</p>
+        {health.state === 'healthy' && (
+          <p data-testid="backend-status" className="status-ok">
+            Backend is healthy ({health.data.status})
+          </p>
+        )}
+        {health.state === 'error' && (
+          <p data-testid="backend-status" className="status-error">
+            Backend unreachable: {health.message}
+          </p>
+        )}
+      </div>
     </section>
   )
 }

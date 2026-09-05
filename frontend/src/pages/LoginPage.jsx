@@ -64,37 +64,40 @@ function LoginPage() {
   }
 
   return (
-    <section>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit} noValidate>
-        <div>
-          <label htmlFor="login-email">Email</label>
-          <input
-            id="login-email"
-            type="email"
-            value={form.email}
-            onChange={handleChange('email')}
-          />
-          {errors.email && <p className="status-error">{errors.email}</p>}
-        </div>
+    <section className="auth-page">
+      <div className="auth-card">
+        <h1>Welcome back</h1>
+        <p className="auth-subtitle">Log in to continue to your dashboard.</p>
+        <form onSubmit={handleSubmit} noValidate className="form">
+          <div className="field">
+            <label htmlFor="login-email">Email</label>
+            <input
+              id="login-email"
+              type="email"
+              value={form.email}
+              onChange={handleChange('email')}
+            />
+            {errors.email && <p className="status-error">{errors.email}</p>}
+          </div>
 
-        <div>
-          <label htmlFor="login-password">Password</label>
-          <input
-            id="login-password"
-            type="password"
-            value={form.password}
-            onChange={handleChange('password')}
-          />
-          {errors.password && <p className="status-error">{errors.password}</p>}
-        </div>
+          <div className="field">
+            <label htmlFor="login-password">Password</label>
+            <input
+              id="login-password"
+              type="password"
+              value={form.password}
+              onChange={handleChange('password')}
+            />
+            {errors.password && <p className="status-error">{errors.password}</p>}
+          </div>
 
-        {formError && <p className="status-error">{formError}</p>}
+          {formError && <p className="status-error">{formError}</p>}
 
-        <button type="submit" disabled={submitting}>
-          {submitting ? 'Logging in...' : 'Log in'}
-        </button>
-      </form>
+          <button type="submit" className="btn-primary" disabled={submitting}>
+            {submitting ? 'Logging in...' : 'Log in'}
+          </button>
+        </form>
+      </div>
     </section>
   )
 }
