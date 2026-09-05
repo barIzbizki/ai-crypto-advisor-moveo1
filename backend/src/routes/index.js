@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { asyncHandler } = require('../middleware/errorHandler');
 const { createAuthRouter } = require('./auth');
+const { createPreferencesRouter } = require('./preferences');
 
 function createRouter(pool, config) {
   const router = Router();
@@ -11,6 +12,7 @@ function createRouter(pool, config) {
   }));
 
   router.use(createAuthRouter(pool, config));
+  router.use(createPreferencesRouter(pool, config));
 
   return router;
 }
