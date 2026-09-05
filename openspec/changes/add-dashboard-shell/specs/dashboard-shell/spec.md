@@ -15,20 +15,12 @@ The system SHALL render the `/dashboard` page, for an authenticated user, with e
 - **WHEN** an unauthenticated user navigates to `/dashboard`
 - **THEN** the system redirects them to the login page instead of rendering any section
 
-### Requirement: Market News section filtered by assets of interest
-The system SHALL provide a Market News section showing crypto news headlines filtered by the authenticated user's saved `assetsOfInterest`, sourced from the CryptoPanic API, falling back to a static list of headlines when the API is unavailable or unconfigured.
+### Requirement: Dashboard composes the Market News section
+The system SHALL render the Market News slot of the dashboard using the `market-news` capability (Jira PM-14/PM-38/PM-39), rather than implementing its own news fetching/fallback logic.
 
-#### Scenario: News available for saved assets
-- **WHEN** the user has saved `assetsOfInterest` and the news source returns headlines for at least one of them
-- **THEN** the Market News section displays those headlines
-
-#### Scenario: News source unavailable falls back to static content
-- **WHEN** the CryptoPanic API request fails or is unconfigured
-- **THEN** the Market News section displays a static fallback list of headlines instead of an error state
-
-#### Scenario: No saved preferences yet
-- **WHEN** the authenticated user has no saved preferences
-- **THEN** the Market News section displays general/unfiltered headlines rather than an empty or error state
+#### Scenario: Market News slot renders the market-news capability's section
+- **WHEN** an authenticated user views the dashboard
+- **THEN** the Market News slot renders the section provided by the `market-news` capability, with its own independent loading/fallback behavior as defined in that capability's spec
 
 ### Requirement: Coin Prices section filtered by assets of interest
 The system SHALL provide a Coin Prices section showing current prices, sourced from the CoinGecko API, for the coins in the authenticated user's saved `assetsOfInterest`.

@@ -1,14 +1,11 @@
 ## 1. Config and shared setup (PM-13)
 
-- [ ] 1.1 Extend `backend/src/config/index.js` with optional env vars: `CRYPTOPANIC_API_KEY`, `COINGECKO_API_BASE_URL` (default to CoinGecko's public base URL), `LLM_API_KEY`, `LLM_API_BASE_URL` — none required outside production, missing values simply disable that integration
+- [ ] 1.1 Extend `backend/src/config/index.js` with optional env vars: `COINGECKO_API_BASE_URL` (default to CoinGecko's public base URL), `LLM_API_KEY`, `LLM_API_BASE_URL` — none required outside production, missing values simply disable that integration. (`CRYPTOPANIC_API_KEY`/`CRYPTOPANIC_API_BASE_URL` are added by `add-market-news`.)
 - [ ] 1.2 Add a small shared helper to read the authenticated user's saved preferences row (`assetsOfInterest`, `investorType`, `contentTypes`) by `user_id`, reused by the news/prices/insight routes
 
-## 2. Market News section (PM-37)
+## 2. Market News section (PM-14, delivered by the `add-market-news` change)
 
-- [ ] 2.1 Add `backend/src/services/cryptopanic.js` fetching headlines from the CryptoPanic API filtered by given asset symbols, exporting a function that returns headlines or throws on failure
-- [ ] 2.2 Add a static fallback headline list used when the CryptoPanic call fails or `CRYPTOPANIC_API_KEY` is unset
-- [ ] 2.3 Add `GET /dashboard/news` behind `requireAuth`: read the user's `assetsOfInterest` (or none), call the CryptoPanic service, fall back to the static list on failure, respond 2xx with headlines
-- [ ] 2.4 Add backend tests: headlines filtered by saved assets, fallback used on API failure, general headlines returned when no preferences saved, 401 when unauthenticated
+- [ ] 2.1 Mount `MarketNewsSection` (from `add-market-news`, `frontend/src/components/dashboard/MarketNewsSection.jsx`) in the Market News slot; no separate backend work here — `GET /dashboard/news` and its CryptoPanic integration/fallback are owned by `add-market-news`
 
 ## 3. Coin Prices section (PM-37)
 
@@ -32,7 +29,7 @@
 ## 6. Wire routes and dashboard UI (PM-13)
 
 - [ ] 6.1 Wire `createDashboardRouter(pool, config)` into `backend/src/routes/index.js` alongside the existing routers
-- [ ] 6.2 Replace `frontend/src/pages/DashboardPage.jsx`'s health-check body with 4 section components rendered in order: Market News, Coin Prices, AI Insight of the Day, Fun Crypto Meme
+- [ ] 6.2 Replace `frontend/src/pages/DashboardPage.jsx`'s health-check body with 4 section components rendered in order: Market News (`MarketNewsSection` from `add-market-news`, task 2.1), Coin Prices, AI Insight of the Day, Fun Crypto Meme
 - [ ] 6.3 Each section component fetches its own endpoint via `apiFetch` independently, with its own loading state and error/fallback rendering, so one section's failure doesn't block the others
 - [ ] 6.4 Confirm unauthenticated access to `/dashboard` redirects to login via the existing `RequireAuth` guard
 

@@ -6,7 +6,7 @@ Logged-in users land on a `/dashboard` page that only shows a backend health che
 
 - Replace the `/dashboard` placeholder with a real dashboard shell rendering 4 fixed sections, in order: Market News, Coin Prices, AI Insight of the Day, and Fun Crypto Meme (PM-37).
 - Add backend endpoint(s) that fetch/assemble content for each section, tailoring results using the authenticated user's saved preferences (`assetsOfInterest`, `investorType`, `contentTypes`) from the existing `GET /preferences`:
-  - Market News: headlines from the CryptoPanic API (or a static fallback list if the API is unavailable/unconfigured), filtered by the user's `assetsOfInterest`.
+  - Market News: rendered via the `market-news` capability (delivered by the sibling change `add-market-news`, PM-14/PM-38/PM-39) — headlines from the CryptoPanic API with a static fallback, filtered by the user's `assetsOfInterest`.
   - Coin Prices: live prices from the CoinGecko API for the user's `assetsOfInterest`.
   - AI Insight of the Day: a short generated insight from a free-tier LLM (e.g. Hugging Face Inference API), tailored to the user's `investorType`.
   - Fun Crypto Meme: a lighthearted crypto meme/image, not tailored by preferences.
@@ -22,6 +22,6 @@ Logged-in users land on a `/dashboard` page that only shows a backend health che
 
 ## Impact
 
-- **Backend**: add a new route module (e.g. `backend/src/routes/dashboard.js`) exposing one or more `GET /dashboard/*` endpoints behind `requireAuth`, each calling out to its external data source (CryptoPanic, CoinGecko, an LLM provider) and reading the user's preferences via the existing `preferences` table/query; wire into `backend/src/routes/index.js`. Adds new outbound HTTP dependencies (CryptoPanic, CoinGecko, an LLM API) and associated config/env vars for API keys/base URLs.
-- **Frontend**: replace `frontend/src/pages/DashboardPage.jsx`'s health-check placeholder with 4 section components, each fetching its own data via `apiFetch` and handling independent loading/error/empty states.
+- **Backend**: add a new route module (e.g. `backend/src/routes/dashboard.js`) exposing `GET /dashboard/*` endpoints behind `requireAuth` for Coin Prices, AI Insight, and Fun Crypto Meme, each calling out to its external data source (CoinGecko, an LLM provider) and reading the user's preferences via the existing `preferences` table/query; wire into `backend/src/routes/index.js`. Market News' `GET /dashboard/news` endpoint is added by `add-market-news`, not here. Adds new outbound HTTP dependencies (CoinGecko, an LLM API) and associated config/env vars for API keys/base URLs.
+- **Frontend**: replace `frontend/src/pages/DashboardPage.jsx`'s health-check placeholder with 4 section components in order (Market News via `add-market-news`'s `MarketNewsSection`, plus Coin Prices/AI Insight/Fun Crypto Meme built here), each fetching its own data via `apiFetch` and handling independent loading/error/empty states.
 - **No breaking changes** — `/dashboard` is currently an unimplemented placeholder.
