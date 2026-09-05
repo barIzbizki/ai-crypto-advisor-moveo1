@@ -3,6 +3,7 @@ const { asyncHandler } = require('../middleware/errorHandler');
 const { createAuthRouter } = require('./auth');
 const { createPreferencesRouter } = require('./preferences');
 const { createNewsRouter } = require('./news');
+const { createPricesRouter } = require('./prices');
 
 function createRouter(pool, config) {
   const router = Router();
@@ -15,6 +16,7 @@ function createRouter(pool, config) {
   router.use(createAuthRouter(pool, config));
   router.use(createPreferencesRouter(pool, config));
   router.use(createNewsRouter(pool, config));
+  router.use(createPricesRouter(pool, config));
 
   return router;
 }

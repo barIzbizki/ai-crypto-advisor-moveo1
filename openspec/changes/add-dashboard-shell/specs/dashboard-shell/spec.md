@@ -22,20 +22,12 @@ The system SHALL render the Market News slot of the dashboard using the `market-
 - **WHEN** an authenticated user views the dashboard
 - **THEN** the Market News slot renders the section provided by the `market-news` capability, with its own independent loading/fallback behavior as defined in that capability's spec
 
-### Requirement: Coin Prices section filtered by assets of interest
-The system SHALL provide a Coin Prices section showing current prices, sourced from the CoinGecko API, for the coins in the authenticated user's saved `assetsOfInterest`.
+### Requirement: Dashboard composes the Coin Prices section
+The system SHALL render the Coin Prices slot of the dashboard using the `coin-prices` capability (Jira PM-15/PM-40/PM-41), rather than implementing its own CoinGecko integration/error-state logic.
 
-#### Scenario: Prices available for saved assets
-- **WHEN** the user has saved `assetsOfInterest`
-- **THEN** the Coin Prices section displays current prices from CoinGecko for each of those assets
-
-#### Scenario: Price source unavailable
-- **WHEN** the CoinGecko API request fails
-- **THEN** the Coin Prices section displays an explicit error/unavailable state instead of stale or fabricated prices
-
-#### Scenario: No saved preferences yet
-- **WHEN** the authenticated user has no saved preferences
-- **THEN** the Coin Prices section displays prices for a default set of coins rather than an empty or error state
+#### Scenario: Coin Prices slot renders the coin-prices capability's section
+- **WHEN** an authenticated user views the dashboard
+- **THEN** the Coin Prices slot renders the section provided by the `coin-prices` capability, with its own independent loading/error behavior as defined in that capability's spec
 
 ### Requirement: AI Insight of the Day section tailored by investor type
 The system SHALL provide an AI Insight of the Day section showing a short, generated insight from a free-tier LLM provider, tailored to the authenticated user's saved `investorType`.

@@ -4,6 +4,7 @@ const DEFAULT_LOCAL_DATABASE_URL = 'postgres://postgres:postgres@localhost:5434/
 const DEFAULT_LOCAL_CORS_ORIGIN = 'http://localhost:5173';
 const DEFAULT_LOCAL_JWT_SECRET = 'dev-only-insecure-secret-do-not-use-in-production';
 const DEFAULT_CRYPTOPANIC_API_BASE_URL = 'https://cryptopanic.com/api/v1';
+const DEFAULT_COINGECKO_API_BASE_URL = 'https://api.coingecko.com/api/v3';
 
 function loadConfig() {
   const nodeEnv = process.env.NODE_ENV || 'development';
@@ -33,6 +34,9 @@ function loadConfig() {
   const cryptoPanicApiKey = process.env.CRYPTOPANIC_API_KEY || '';
   const cryptoPanicApiBaseUrl = process.env.CRYPTOPANIC_API_BASE_URL || DEFAULT_CRYPTOPANIC_API_BASE_URL;
 
+  // CoinGecko's free tier needs no API key.
+  const coinGeckoApiBaseUrl = process.env.COINGECKO_API_BASE_URL || DEFAULT_COINGECKO_API_BASE_URL;
+
   let jwtSecret = process.env.JWT_SECRET;
   if (!jwtSecret) {
     if (nodeEnv === 'production') {
@@ -42,7 +46,7 @@ function loadConfig() {
     jwtSecret = DEFAULT_LOCAL_JWT_SECRET;
   }
 
-  return { nodeEnv, port, databaseUrl, corsOrigin, jwtSecret, cryptoPanicApiKey, cryptoPanicApiBaseUrl };
+  return { nodeEnv, port, databaseUrl, corsOrigin, jwtSecret, cryptoPanicApiKey, cryptoPanicApiBaseUrl, coinGeckoApiBaseUrl };
 }
 
 module.exports = { loadConfig };

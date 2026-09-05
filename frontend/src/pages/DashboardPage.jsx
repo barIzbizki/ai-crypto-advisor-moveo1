@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../api/client'
 import MarketNewsSection from '../components/dashboard/MarketNewsSection'
+import CoinPricesSection from '../components/dashboard/CoinPricesSection'
 
 function DashboardPage() {
   const [health, setHealth] = useState({ state: 'loading' })
@@ -43,6 +44,7 @@ function DashboardPage() {
       </div>
 
       <MarketNewsSection />
+      <CoinPricesSection />
     </section>
   )
 }

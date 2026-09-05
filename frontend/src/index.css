@@ -265,3 +265,25 @@ body {
   color: var(--color-text-muted);
   font-size: 0.875rem;
 }
+
+.price-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.price-list li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-symbol {
+  font-weight: 500;
+}
+
+.price-value {
+  color: var(--color-text-muted);
+}
