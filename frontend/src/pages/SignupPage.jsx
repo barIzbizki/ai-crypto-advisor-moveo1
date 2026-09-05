@@ -78,59 +78,62 @@ function SignupPage() {
   }
 
   return (
-    <section>
-      <h1>Signup</h1>
-      <form onSubmit={handleSubmit} noValidate>
-        <div>
-          <label htmlFor="signup-name">Name</label>
-          <input
-            id="signup-name"
-            type="text"
-            value={form.name}
-            onChange={handleChange('name')}
-          />
-          {errors.name && <p className="status-error">{errors.name}</p>}
-        </div>
+    <section className="auth-page">
+      <div className="auth-card">
+        <h1>Create your account</h1>
+        <p className="auth-subtitle">Sign up to get started.</p>
+        <form onSubmit={handleSubmit} noValidate className="form">
+          <div className="field">
+            <label htmlFor="signup-name">Name</label>
+            <input
+              id="signup-name"
+              type="text"
+              value={form.name}
+              onChange={handleChange('name')}
+            />
+            {errors.name && <p className="status-error">{errors.name}</p>}
+          </div>
 
-        <div>
-          <label htmlFor="signup-email">Email</label>
-          <input
-            id="signup-email"
-            type="email"
-            value={form.email}
-            onChange={handleChange('email')}
-          />
-          {errors.email && <p className="status-error">{errors.email}</p>}
-        </div>
+          <div className="field">
+            <label htmlFor="signup-email">Email</label>
+            <input
+              id="signup-email"
+              type="email"
+              value={form.email}
+              onChange={handleChange('email')}
+            />
+            {errors.email && <p className="status-error">{errors.email}</p>}
+          </div>
 
-        <div>
-          <label htmlFor="signup-password">Password</label>
-          <input
-            id="signup-password"
-            type="password"
-            value={form.password}
-            onChange={handleChange('password')}
-          />
-          {errors.password && <p className="status-error">{errors.password}</p>}
-        </div>
+          <div className="field">
+            <label htmlFor="signup-password">Password</label>
+            <input
+              id="signup-password"
+              type="password"
+              value={form.password}
+              onChange={handleChange('password')}
+            />
+            {errors.password && <p className="status-error">{errors.password}</p>}
+          </div>
 
-        <div>
-          <label htmlFor="signup-confirm-password">Confirm password</label>
-          <input
-            id="signup-confirm-password"
-            type="password"
-            value={form.confirmPassword}
-            onChange={handleChange('confirmPassword')}
-          />
-          {errors.confirmPassword && <p className="status-error">{errors.confirmPassword}</p>}
-        </div>
+          <div className="field">
+            <label htmlFor="signup-confirm-password">Confirm password</label>
+            <input
+              id="signup-confirm-password"
+              type="password"
+              value={form.confirmPassword}
+              onChange={handleChange('confirmPassword')}
+            />
+            {errors.confirmPassword && <p className="status-error">{errors.confirmPassword}</p>}
+          </div>
 
-        {formError && <p className="status-error">{formError}</p>}
+          {formError && <p className="status-error">{formError}</p>}
 
-        <button type="submit" disabled={submitting}>
-          {submitting ? 'Signing up...' : 'Sign up'}
-        </button>
-      </form>
+          <button type="submit" className="btn-primary" disabled={submitting}>
+            {submitting ? 'Signing up...' : 'Sign up'}
+          </button>
+        </form>
+      </div>
     </section>
   )
 }

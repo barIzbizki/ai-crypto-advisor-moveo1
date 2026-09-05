@@ -1,8 +1,10 @@
 function OnboardingPage() {
   return (
-    <section>
+    <section className="page">
       <h1>Onboarding</h1>
-      <p>Onboarding page placeholder.</p>
+      <div className="card">
+        <p>Onboarding page placeholder.</p>
+      </div>
     </section>
   )
 }

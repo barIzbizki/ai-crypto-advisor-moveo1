@@ -1,14 +1,33 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { getAuthToken, setAuthToken } from '../api/client'
 
 function Layout() {
+  const navigate = useNavigate()
+  const isAuthed = Boolean(getAuthToken())
+
+  function handleLogout() {
+    setAuthToken(null)
+    navigate('/login', { replace: true })
+  }
+
   return (
     <div className="app-shell">
       <header className="app-header">
+        <Link to="/" className="app-brand">Moveo</Link>
         <nav>
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
-          <Link to="/onboarding">Onboarding</Link>
+          {isAuthed ? (
+            <>
+              <Link to="/dashboard">Dashboard</Link>
+              <button type="button" className="link-button" onClick={handleLogout}>
+                Log out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">Log in</Link>
+              <Link to="/signup" className="nav-cta">Sign up</Link>
+            </>
+          )}
         </nav>
       </header>
       <main className="app-content">
