@@ -22,11 +22,18 @@ export async function apiFetch(path, options = {}) {
   if (token) {
     headers.Authorization = `Bearer ${token}`
   }
+  if (options.body && !headers['Content-Type']) {
+    headers['Content-Type'] = 'application/json'
+  }
 
   const response = await fetch(`${API_BASE_URL}${path}`, { ...options, headers })
 
   if (!response.ok) {
-    throw new Error(`Request to ${path} failed with status ${response.status}`)
+    const body = await response.json().catch(() => null)
+    const error = new Error(body?.error?.message || `Request to ${path} failed with status ${response.status}`)
+    error.status = response.status
+    error.body = body
+    throw error
   }
 
   return response.json()

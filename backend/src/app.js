@@ -9,7 +9,7 @@ function createApp(pool, config) {
 
   app.use(cors({ origin: config.corsOrigin }));
   app.use(express.json());
-  app.use(createRouter(pool));
+  app.use(createRouter(pool, config));
 
   app.use(notFound);
   app.use(errorHandler);

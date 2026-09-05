@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const DEFAULT_LOCAL_DATABASE_URL = 'postgres://postgres:postgres@localhost:5434/moveo1';
 const DEFAULT_LOCAL_CORS_ORIGIN = 'http://localhost:5173';
+const DEFAULT_LOCAL_JWT_SECRET = 'dev-only-insecure-secret-do-not-use-in-production';
 
 function loadConfig() {
   const nodeEnv = process.env.NODE_ENV || 'development';
@@ -27,7 +28,16 @@ function loadConfig() {
   // Local/dev fallback matching the frontend's default Vite dev server origin.
   const corsOrigin = process.env.CORS_ORIGIN || DEFAULT_LOCAL_CORS_ORIGIN;
 
-  return { nodeEnv, port, databaseUrl, corsOrigin };
+  let jwtSecret = process.env.JWT_SECRET;
+  if (!jwtSecret) {
+    if (nodeEnv === 'production') {
+      throw new Error('Missing required environment variable: JWT_SECRET');
+    }
+    // Local/test fallback so the app can run without extra setup.
+    jwtSecret = DEFAULT_LOCAL_JWT_SECRET;
+  }
+
+  return { nodeEnv, port, databaseUrl, corsOrigin, jwtSecret };
 }
 
 module.exports = { loadConfig };
