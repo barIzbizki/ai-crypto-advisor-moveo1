@@ -26,7 +26,7 @@ async function main() {
     process.exit(1);
   }
 
-  const app = createApp(pool);
+  const app = createApp(pool, config);
   app.listen(config.port, () => {
     console.log(`[${config.nodeEnv}] backend listening on port ${config.port}`);
   });

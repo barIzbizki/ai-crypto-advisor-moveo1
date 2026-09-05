@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const DEFAULT_LOCAL_DATABASE_URL = 'postgres://postgres:postgres@localhost:5434/moveo1';
+const DEFAULT_LOCAL_CORS_ORIGIN = 'http://localhost:5173';
 
 function loadConfig() {
   const nodeEnv = process.env.NODE_ENV || 'development';
@@ -23,7 +24,10 @@ function loadConfig() {
     throw new Error(`Invalid DATABASE_URL: "${databaseUrl}" is not a valid PostgreSQL connection string`);
   }
 
-  return { nodeEnv, port, databaseUrl };
+  // Local/dev fallback matching the frontend's default Vite dev server origin.
+  const corsOrigin = process.env.CORS_ORIGIN || DEFAULT_LOCAL_CORS_ORIGIN;
+
+  return { nodeEnv, port, databaseUrl, corsOrigin };
 }
 
 module.exports = { loadConfig };
