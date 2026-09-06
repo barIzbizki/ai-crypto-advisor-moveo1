@@ -29,20 +29,12 @@ The system SHALL render the Coin Prices slot of the dashboard using the `coin-pr
 - **WHEN** an authenticated user views the dashboard
 - **THEN** the Coin Prices slot renders the section provided by the `coin-prices` capability, with its own independent loading/error behavior as defined in that capability's spec
 
-### Requirement: AI Insight of the Day section tailored by investor type
-The system SHALL provide an AI Insight of the Day section showing a short, generated insight from a free-tier LLM provider, tailored to the authenticated user's saved `investorType`.
+### Requirement: Dashboard composes the AI Insight of the Day section
+The system SHALL render the AI Insight of the Day slot of the dashboard using the `ai-insight` capability (Jira PM-16/PM-42/PM-43), rather than implementing its own Hugging Face integration/fallback logic.
 
-#### Scenario: Insight generated for saved investor type
-- **WHEN** the user has a saved `investorType`
-- **THEN** the AI Insight of the Day section displays a generated insight consistent with that investor type
-
-#### Scenario: LLM source unavailable
-- **WHEN** the LLM provider request fails or is unconfigured
-- **THEN** the AI Insight of the Day section displays a static fallback insight instead of an error state
-
-#### Scenario: No saved preferences yet
-- **WHEN** the authenticated user has no saved preferences
-- **THEN** the AI Insight of the Day section displays a generic, non-tailored insight rather than an empty or error state
+#### Scenario: AI Insight slot renders the ai-insight capability's section
+- **WHEN** an authenticated user views the dashboard
+- **THEN** the AI Insight of the Day slot renders the section provided by the `ai-insight` capability, with its own independent loading/fallback behavior as defined in that capability's spec
 
 ### Requirement: Fun Crypto Meme section
 The system SHALL provide a Fun Crypto Meme section displaying a crypto-themed meme or image, not tailored by saved preferences.
