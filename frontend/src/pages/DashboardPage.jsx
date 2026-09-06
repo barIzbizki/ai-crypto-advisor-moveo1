@@ -3,6 +3,7 @@ import { apiFetch } from '../api/client'
 import MarketNewsSection from '../components/dashboard/MarketNewsSection'
 import CoinPricesSection from '../components/dashboard/CoinPricesSection'
 import AiInsightSection from '../components/dashboard/AiInsightSection'
+import CryptoMemeSection from '../components/dashboard/CryptoMemeSection'
 
 function DashboardPage() {
   const [health, setHealth] = useState({ state: 'loading' })
@@ -47,6 +48,7 @@ function DashboardPage() {
       <MarketNewsSection />
       <CoinPricesSection />
       <AiInsightSection />
+      <CryptoMemeSection />
     </section>
   )
 }

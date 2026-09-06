@@ -5,6 +5,7 @@ const { createPreferencesRouter } = require('./preferences');
 const { createNewsRouter } = require('./news');
 const { createPricesRouter } = require('./prices');
 const { createInsightRouter } = require('./insight');
+const { createMemeRouter } = require('./meme');
 
 function createRouter(pool, config) {
   const router = Router();
@@ -19,6 +20,7 @@ function createRouter(pool, config) {
   router.use(createNewsRouter(pool, config));
   router.use(createPricesRouter(pool, config));
   router.use(createInsightRouter(pool, config));
+  router.use(createMemeRouter(pool, config));
 
   return router;
 }

@@ -36,12 +36,12 @@ The system SHALL render the AI Insight of the Day slot of the dashboard using th
 - **WHEN** an authenticated user views the dashboard
 - **THEN** the AI Insight of the Day slot renders the section provided by the `ai-insight` capability, with its own independent loading/fallback behavior as defined in that capability's spec
 
-### Requirement: Fun Crypto Meme section
-The system SHALL provide a Fun Crypto Meme section displaying a crypto-themed meme or image, not tailored by saved preferences.
+### Requirement: Dashboard composes the Fun Crypto Meme section
+The system SHALL render the Fun Crypto Meme slot of the dashboard using the `crypto-meme` capability (Jira PM-17/PM-44/PM-45), rather than implementing its own meme list/selection logic.
 
-#### Scenario: Meme displayed
+#### Scenario: Fun Crypto Meme slot renders the crypto-meme capability's section
 - **WHEN** an authenticated user views the dashboard
-- **THEN** the Fun Crypto Meme section displays a crypto-themed meme image
+- **THEN** the Fun Crypto Meme slot renders the section provided by the `crypto-meme` capability, with its own independent loading/error behavior as defined in that capability's spec
 
 ### Requirement: Sections fail independently
 The system SHALL load each of the 4 dashboard sections independently, such that a failure or delay in one section's data source does not prevent the other sections from rendering.
