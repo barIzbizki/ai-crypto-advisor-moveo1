@@ -2,6 +2,11 @@ const { Router } = require('express');
 const { asyncHandler } = require('../middleware/errorHandler');
 const { createAuthRouter } = require('./auth');
 const { createPreferencesRouter } = require('./preferences');
+const { createNewsRouter } = require('./news');
+const { createPricesRouter } = require('./prices');
+const { createInsightRouter } = require('./insight');
+const { createMemeRouter } = require('./meme');
+const { createVotesRouter } = require('./votes');
 
 function createRouter(pool, config) {
   const router = Router();
@@ -13,6 +18,11 @@ function createRouter(pool, config) {
 
   router.use(createAuthRouter(pool, config));
   router.use(createPreferencesRouter(pool, config));
+  router.use(createNewsRouter(pool, config));
+  router.use(createPricesRouter(pool, config));
+  router.use(createInsightRouter(pool, config));
+  router.use(createMemeRouter(pool, config));
+  router.use(createVotesRouter(pool, config));
 
   return router;
 }
