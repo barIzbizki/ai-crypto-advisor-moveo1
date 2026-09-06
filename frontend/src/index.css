@@ -236,6 +236,21 @@ body {
   max-width: 880px;
 }
 
+.dashboard-header {
+  text-align: center;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.dashboard-greeting {
+  margin: 4px 0 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
