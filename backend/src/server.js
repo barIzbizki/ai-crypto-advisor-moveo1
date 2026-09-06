@@ -18,7 +18,7 @@ async function main() {
     process.exit(1);
   }
 
-  const pool = createPool(config.databaseUrl);
+  const pool = createPool(config.databaseUrl, config.nodeEnv);
   try {
     await verifyConnection(pool);
   } catch (err) {
