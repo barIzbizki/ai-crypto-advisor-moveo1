@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../../api/client'
+import VoteControl from './VoteControl'
 
 function formatPrice(price) {
   return price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
@@ -30,7 +31,10 @@ function CoinPricesSection() {
 
   return (
     <section className="card dashboard-section">
-      <h2>Coin Prices</h2>
+      <div className="dashboard-section-header">
+        <h2>Coin Prices</h2>
+        <VoteControl target="coin-prices" />
+      </div>
       {state.status === 'loading' && <p className="dashboard-section-status">Loading prices...</p>}
       {state.status === 'error' && (
         <p className="status-error">Coin prices are currently unavailable: {state.message}</p>

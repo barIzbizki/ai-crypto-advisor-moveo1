@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../../api/client'
+import VoteControl from './VoteControl'
 
 function CryptoMemeSection() {
   const [state, setState] = useState({ status: 'loading' })
@@ -26,7 +27,10 @@ function CryptoMemeSection() {
 
   return (
     <section className="card dashboard-section">
-      <h2>Fun Crypto Meme</h2>
+      <div className="dashboard-section-header">
+        <h2>Fun Crypto Meme</h2>
+        {state.status === 'ready' && <VoteControl target={`meme:${state.meme.imageUrl}`} />}
+      </div>
       {state.status === 'loading' && <p className="dashboard-section-status">Loading meme...</p>}
       {state.status === 'error' && (
         <p className="status-error">Unable to load a meme right now: {state.message}</p>

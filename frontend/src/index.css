@@ -257,13 +257,54 @@ body {
   flex-direction: column;
 }
 
-.dashboard-section h2 {
+.dashboard-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   margin: 0 0 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--color-border);
+}
+
+.dashboard-section-header h2 {
+  margin: 0;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.01em;
+}
+
+.vote-control {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.vote-button {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  cursor: pointer;
+  color: var(--color-text-muted);
+}
+
+.vote-button:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+.vote-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.vote-button.vote-active {
+  border-color: var(--color-primary);
+  background: rgba(79, 70, 229, 0.1);
+  color: var(--color-primary);
 }
 
 .dashboard-section-status {
