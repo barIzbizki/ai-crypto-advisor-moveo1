@@ -120,3 +120,20 @@ test('GET /dashboard/prices: unauthenticated request returns 401', async (t) => 
 
   assert.equal(status, 401);
 });
+
+test('GET /dashboard/prices: sends x-cg-demo-api-key header when COINGECKO_API_KEY is configured', async (t) => {
+  const requestHeaders = [];
+  mockCoinGeckoFetch(t, (url, options) => {
+    requestHeaders.push(options?.headers);
+    return jsonResponse({ bitcoin: { usd: 65000 } });
+  });
+
+  const config = { ...TEST_CONFIG, coinGeckoApiKey: 'demo-test-key' };
+  const { server, baseUrl } = await startTestServer(createFakePool(), config);
+  t.after(() => server.close());
+
+  const { status } = await fetchPricesEndpoint(baseUrl, tokenFor(1));
+
+  assert.equal(status, 200);
+  assert.equal(requestHeaders[0]['x-cg-demo-api-key'], 'demo-test-key');
+});

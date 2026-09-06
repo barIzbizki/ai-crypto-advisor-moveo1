@@ -39,8 +39,10 @@ function loadConfig() {
   const cryptoPanicApiKey = process.env.CRYPTOPANIC_API_KEY || '';
   const cryptoPanicApiBaseUrl = process.env.CRYPTOPANIC_API_BASE_URL || DEFAULT_CRYPTOPANIC_API_BASE_URL;
 
-  // CoinGecko's free tier needs no API key.
+  // CoinGecko's free tier needs no API key, but an optional Demo key raises
+  // the rate limit above the shared anonymous-tier limit.
   const coinGeckoApiBaseUrl = process.env.COINGECKO_API_BASE_URL || DEFAULT_COINGECKO_API_BASE_URL;
+  const coinGeckoApiKey = process.env.COINGECKO_API_KEY || '';
 
   // Optional: missing key/url simply routes the AI Insight section to its static fallback.
   const llmApiKey = process.env.LLM_API_KEY || '';
@@ -56,7 +58,7 @@ function loadConfig() {
     jwtSecret = DEFAULT_LOCAL_JWT_SECRET;
   }
 
-  return { nodeEnv, port, databaseUrl, corsOrigin, jwtSecret, cryptoPanicApiKey, cryptoPanicApiBaseUrl, coinGeckoApiBaseUrl, llmApiKey, llmApiBaseUrl, llmModel };
+  return { nodeEnv, port, databaseUrl, corsOrigin, jwtSecret, cryptoPanicApiKey, cryptoPanicApiBaseUrl, coinGeckoApiBaseUrl, coinGeckoApiKey, llmApiKey, llmApiBaseUrl, llmModel };
 }
 
 module.exports = { loadConfig };
