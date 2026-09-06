@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../../api/client'
+import VoteControl from './VoteControl'
 
 function MarketNewsSection() {
   const [state, setState] = useState({ status: 'loading' })
@@ -26,7 +27,10 @@ function MarketNewsSection() {
 
   return (
     <section className="card dashboard-section">
-      <h2>Market News</h2>
+      <div className="dashboard-section-header">
+        <h2>Market News</h2>
+        <VoteControl target="news:latest" />
+      </div>
       {state.status === 'loading' && <p className="dashboard-section-status">Loading headlines...</p>}
       {state.status === 'error' && (
         <p className="status-error">Unable to load market news: {state.message}</p>

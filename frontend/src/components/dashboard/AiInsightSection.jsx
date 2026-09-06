@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../../api/client'
+import VoteControl from './VoteControl'
 
 function AiInsightSection() {
   const [state, setState] = useState({ status: 'loading' })
+  const todayIsoDate = new Date().toISOString().slice(0, 10)
 
   useEffect(() => {
     let cancelled = false
@@ -26,7 +28,10 @@ function AiInsightSection() {
 
   return (
     <section className="card dashboard-section">
-      <h2>AI Insight of the Day</h2>
+      <div className="dashboard-section-header">
+        <h2>AI Insight of the Day</h2>
+        <VoteControl target={`insight:${todayIsoDate}`} />
+      </div>
       {state.status === 'loading' && <p className="dashboard-section-status">Generating today's insight...</p>}
       {state.status === 'error' && (
         <p className="status-error">Unable to load today's insight: {state.message}</p>
