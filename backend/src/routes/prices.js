@@ -58,7 +58,7 @@ function createPricesRouter(pool, config) {
 
     let entries;
     try {
-      entries = await fetchPrices({ baseUrl: config.coinGeckoApiBaseUrl, coinIds });
+      entries = await fetchPrices({ baseUrl: config.coinGeckoApiBaseUrl, coinIds, apiKey: config.coinGeckoApiKey });
     } catch (err) {
       console.error('CoinGecko fetch failed:', { name: err.name, message: err.message, cause: err.cause });
       const error = new Error('Coin prices are currently unavailable');
